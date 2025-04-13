@@ -13,4 +13,5 @@ kotlin {
 }
 dependencies {
     implementation(project(":aizome"))
+    implementation(libs.androidx.compose.ui.text)
 }
