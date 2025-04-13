@@ -31,7 +31,7 @@ internal fun parseParameterStrings(segments: List<ParserSegment>, logger: Parser
                         continue
                     }
 
-                    val (formatRange, formatText) = scanFormatSpecifier(text, afterPercent)
+                    val (formatRange, formatText) = scanFormatSpecifier(text, percent)
                     if (formatRange == null || formatText == null) {
                         // 不正な書式 → 単に % を残す
                         appendTextSegment("%", styles = segment.styles, segments = result)
@@ -64,6 +64,8 @@ internal fun parseParameterStrings(segments: List<ParserSegment>, logger: Parser
                             styles = segment.styles
                         )
                     )
+
+                    i = formatRange.last + 1
                 }
             }
             is ParserSegment.Placeholder -> {
@@ -76,7 +78,7 @@ internal fun parseParameterStrings(segments: List<ParserSegment>, logger: Parser
 }
 
 private fun scanFormatSpecifier(text: String, start: Int): Pair<IntRange?, String?> {
-    var i = start + 1
+    var i = start
     var sawConversion = false
 
     while (i < text.length) {
