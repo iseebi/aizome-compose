@@ -4,8 +4,13 @@ import net.iseteki.aizome.logger.AizomeDefaultLogger
 import net.iseteki.aizome.logger.AizomeLogger
 import net.iseteki.aizome.parser.Parser
 import net.iseteki.aizome.parser.ParserLoggerImpl
+import net.iseteki.aizome.render.Render
+import net.iseteki.aizome.render.RenderImpl
+import net.iseteki.aizome.render.RenderLoggerImpl
+import net.iseteki.aizome.render.RenderOperator
 
-class Aizome<T>(
+open class Aizome<T>(
+    private val renderOperator: RenderOperator<T>,
 ) {
     val defaultStyles: Map<String, StringStyle<T>>
         get() = _defaultStyles
@@ -16,6 +21,7 @@ class Aizome<T>(
     private var _logger: AizomeLogger = AizomeDefaultLogger()
 
     private var _parser: Parser = Parser(ParserLoggerImpl(_logger))
+    private var _render: Render<T> = RenderImpl(RenderLoggerImpl(_logger), renderOperator)
 
     fun setDefaultStyles(styles: Map<String, StringStyle<T>>) {
         _defaultStyles = styles
@@ -24,5 +30,6 @@ class Aizome<T>(
     fun setLogger(logger: AizomeLogger) {
         _logger = logger
         _parser = Parser(ParserLoggerImpl(_logger))
+        _render = RenderImpl(RenderLoggerImpl(_logger), renderOperator)
     }
 }
