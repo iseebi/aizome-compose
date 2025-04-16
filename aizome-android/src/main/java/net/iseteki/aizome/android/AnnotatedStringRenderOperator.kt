@@ -22,13 +22,13 @@ internal class AnnotatedStringRenderOperator: RenderOperator<AnnotatedString> {
         withDictionary: Map<String, StringStyle<AnnotatedString>>
     ): AnnotatedString {
         // Create a new AnnotatedString.Builder to apply styles
-        val builder = AnnotatedString.Builder(toStyled)
+        val builder = AnnotatedStringStyledStringBuilder(toStyled)
 
         // Apply the styles to the specified range
         for (style in styles) {
-            withDictionary[style]?.apply(toStyled, inRange)
+            withDictionary[style]?.apply(builder, inRange)
         }
 
-        return builder.toAnnotatedString()
+        return builder.toStyledString()
     }
 }

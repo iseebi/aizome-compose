@@ -1,5 +1,7 @@
 package net.iseteki.aizome
 
+import StyledStringBuilder
+
 interface StringStyle<T> {
-    fun apply(toStyled: T, range: IntRange)
+    fun apply(builder: StyledStringBuilder<T>, range: IntRange)
 }
