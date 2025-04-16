@@ -1,9 +1,10 @@
-package net.iseteki.aizome.android
+package net.iseteki.aizome.multiplatform
 
 import StyledStringBuilder
 import androidx.compose.ui.text.AnnotatedString
 
-class AnnotatedStringStyledStringBuilder(annotatedString: AnnotatedString) : StyledStringBuilder<AnnotatedString> {
+class AnnotatedStringStyledStringBuilder(annotatedString: AnnotatedString) :
+    StyledStringBuilder<AnnotatedString> {
     val builder: AnnotatedString.Builder = AnnotatedString.Builder(annotatedString)
 
     override fun toStyledString(): AnnotatedString {

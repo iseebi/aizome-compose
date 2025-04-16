@@ -1,6 +1,6 @@
 plugins {
-    id("java-library")
-    alias(libs.plugins.jetbrains.kotlin.jvm)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.android.library)
 }
 java {
     sourceCompatibility = JavaVersion.VERSION_11
@@ -12,6 +12,6 @@ kotlin {
     }
 }
 dependencies {
-    implementation(project(":aizome"))
     implementation(libs.androidx.compose.ui.text)
+    implementation(project(":aizome"))
 }

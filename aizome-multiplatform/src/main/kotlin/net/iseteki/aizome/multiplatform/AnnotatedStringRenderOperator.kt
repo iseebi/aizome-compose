@@ -1,10 +1,10 @@
-package net.iseteki.aizome.android
+package net.iseteki.aizome.multiplatform
 
 import androidx.compose.ui.text.AnnotatedString
 import net.iseteki.aizome.StringStyle
 import net.iseteki.aizome.render.RenderOperator
 
-internal class AnnotatedStringRenderOperator: RenderOperator<AnnotatedString> {
+internal class AnnotatedStringRenderOperator : RenderOperator<AnnotatedString> {
     override fun create(fromString: String): AnnotatedString {
         return AnnotatedString(fromString)
     }
