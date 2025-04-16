@@ -1,7 +1,6 @@
 package net.iseteki.aizome.render;
 
 import net.iseteki.aizome.StringStyle
-import org.w3c.dom.ranges.Range
 
 interface RenderOperator<T> {
     fun create(fromString: String): T
