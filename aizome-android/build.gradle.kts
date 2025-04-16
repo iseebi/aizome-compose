@@ -11,6 +11,10 @@ kotlin {
         jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11
     }
 }
+android {
+    namespace = "net.iseteki.aizome.android"
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
+}
 dependencies {
     implementation(libs.androidx.compose.ui.text)
     implementation(project(":aizome"))
