@@ -1,14 +1,14 @@
 package net.iseteki.aizome.android
 
 import androidx.compose.ui.text.AnnotatedString
-import net.iseteki.aizome.Aizome
+import net.iseteki.aizome.AbstractAizome
 
-class AizomeAndroid: Aizome<AnnotatedString>(
+class Aizome: AbstractAizome<AnnotatedString>(
     AnnotatedStringRenderOperator()
 ) {
     companion object {
-        val instance: AizomeAndroid by lazy {
-            AizomeAndroid()
+        val instance: Aizome by lazy {
+            Aizome()
         }
     }
 }

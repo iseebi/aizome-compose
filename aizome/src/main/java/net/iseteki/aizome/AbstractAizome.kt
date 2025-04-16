@@ -9,7 +9,7 @@ import net.iseteki.aizome.render.RenderImpl
 import net.iseteki.aizome.render.RenderLoggerImpl
 import net.iseteki.aizome.render.RenderOperator
 
-open class Aizome<T>(
+abstract class AbstractAizome<T>(
     private val renderOperator: RenderOperator<T>,
 ) {
     val defaultStyles: Map<String, StringStyle<T>>
