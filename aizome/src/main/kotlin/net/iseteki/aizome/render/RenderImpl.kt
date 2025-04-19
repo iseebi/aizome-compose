@@ -103,7 +103,6 @@ class RenderImpl<T>(
 
     private fun applyStyle(string: String, styles: List<String>, definitions: Map<String, StringStyle<T>>): T {
         val styledString = operator.create(string)
-        operator.apply(styledString, string.indices, styles, definitions)
-        return styledString
+        return operator.apply(styledString, string.indices, styles, definitions, logger)
     }
 }

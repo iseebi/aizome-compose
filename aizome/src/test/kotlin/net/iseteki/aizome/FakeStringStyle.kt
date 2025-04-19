@@ -3,14 +3,14 @@ package net.iseteki.aizome
 import StyledStringBuilder
 
 class FakeStringStyle(
-    private val color: String,
-    private val fontSize: Int,
-    private val isBold: Boolean,
+    private val color: String? = null,
+    private val fontSize: Int? = null,
+    private val isBold: Boolean? = null,
 ) : StringStyle<FakeStyledString> {
     override fun apply(builder: StyledStringBuilder<FakeStyledString>, range: IntRange) {
         val fakeStyledStringBuilder = builder.getBuilder()
-        fakeStyledStringBuilder.color = color
-        fakeStyledStringBuilder.fontSize = fontSize
-        fakeStyledStringBuilder.isBold = isBold
+        color?.let { fakeStyledStringBuilder.color = it }
+        fontSize?.let { fakeStyledStringBuilder.fontSize = it }
+        isBold?.let { fakeStyledStringBuilder.isBold = it }
     }
 }

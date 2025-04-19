@@ -27,18 +27,21 @@ class FakeStyledStringRenderOperator : RenderOperator<FakeStyledString> {
         toStyled: FakeStyledString,
         inRange: IntRange,
         styles: List<String>,
-        withDictionary: Map<String, StringStyle<FakeStyledString>>
+        withDictionary: Map<String, StringStyle<FakeStyledString>>,
+        logger: RenderLogger,
     ): FakeStyledString {
-        var builders = toStyled.spans.map { FakeStyledStringBuilder(
-            text = it.text,
-            color = it.color,
-            fontSize = it.fontSize,
-            isBold = it.isBold
-        ) }
+        val builders = toStyled.spans.map {
+            FakeStyledStringBuilder(
+                text = it.text,
+                color = it.color,
+                fontSize = it.fontSize,
+                isBold = it.isBold
+            )
+        }
 
         for (style in styles) {
             for (builder in builders) {
-                withDictionary[style]?.apply(builder, inRange)
+                lookupStyle(style, withDictionary, logger)?.apply(builder, inRange)
             }
         }
 
