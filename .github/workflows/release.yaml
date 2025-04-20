@@ -13,12 +13,6 @@ jobs:
       packages: write
       attestations: write
       id-token: write
-    strategy:
-      matrix:
-        component:
-          - aizome
-          - aizome-android
-          - aizome-multiplatform
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -33,7 +27,7 @@ jobs:
             ${{ runner.os }}-gradle
       - name: Publish
         run: |
-          ./gradlew -Pversion=${{ github.ref_name }} clean :${{ matrix.component }}:assembleRelease :${{ matrix.component }}:publish
+          ./gradlew -Pversion=${{ github.ref_name }} clean assembleRelease publish
         env:
           USERNAME: ${{ github.repository_owner }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
