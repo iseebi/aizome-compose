@@ -53,7 +53,4 @@ dependencies {
     implementation(libs.material)
     implementation(project(":aizome"))
     implementation(project(":aizome-android"))
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
 }
