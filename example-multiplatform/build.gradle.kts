@@ -43,6 +43,9 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.jetbrains.androidx.lifecycle.viewmodel)
             implementation(libs.jetbrains.androidx.lifecycle.runtime.compose)
+
+            implementation(project(":aizome"))
+            implementation(project(":aizome-multiplatform"))
         }
     }
 }

@@ -104,7 +104,7 @@ class RenderImpl<T>(
                         return@let operator.create("")
                     }
                     val arg = arguments[it.index]
-                    val formattedString = processFormat(it.format, arg)
+                    val formattedString = processStringFormat(it.format, arg)
                     applyStyle(formattedString, it.styles, styles)
                 }
                 is RenderSegment.Rendered -> it.styledString
@@ -127,7 +127,7 @@ class RenderImpl<T>(
                         return@fold result
                     }
                     val arg = arguments[segment.index]
-                    val formattedString = processFormat(segment.format, arg)
+                    val formattedString = processStringFormat(segment.format, arg)
                     val attributedString = applyStyle(formattedString, segment.styles, styles)
                     operator.merge(result, attributedString)
                 }
@@ -143,11 +143,3 @@ class RenderImpl<T>(
         return operator.apply(styledString, string.indices, styles, definitions, logger)
     }
 }
-
-private fun processFormat(format: String, args: Any): String =
-    if (format.endsWith("@")) {
-        // 末尾 @ の場合は、s でフォーマット
-        String.format("${format.dropLast(1)}s", args)
-    } else {
-        String.format(format, args)
-    }
