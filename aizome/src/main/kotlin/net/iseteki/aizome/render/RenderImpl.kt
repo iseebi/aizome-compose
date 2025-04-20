@@ -54,7 +54,22 @@ class RenderImpl<T>(
         segments: List<RenderSegment<T>>,
         styles: Map<String, StringStyle<T>>
     ): T {
-        return segments.fold(operator.create("")) { result, segment ->
+        if (segments.isEmpty()) {
+            return operator.create("")
+        }
+
+        val first = segments.first().let {
+            when (it) {
+                is RenderSegment.Text -> applyStyle(it.string, it.styles, styles)
+                is RenderSegment.Placeholder -> applyStyle(it.raw, it.styles, styles)
+                is RenderSegment.Rendered -> it.styledString
+            }
+        }
+        if (segments.size == 1) {
+            return first
+        }
+
+        return segments.drop(1).fold(first) { result, segment ->
             when (segment) {
                 is RenderSegment.Text -> {
                     val attributedString = applyStyle(segment.string, segment.styles, styles)
@@ -68,7 +83,6 @@ class RenderImpl<T>(
                     operator.merge(result, segment.styledString)
                 }
             }
-            result
         }
     }
 
