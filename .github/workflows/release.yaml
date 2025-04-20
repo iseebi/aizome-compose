@@ -7,6 +7,7 @@ on:
 
 jobs:
   release:
+    name: "Release in GitHub Package Registry"
     runs-on: macos-14
     permissions:
       contents: read
@@ -14,6 +15,13 @@ jobs:
       attestations: write
       id-token: write
     steps:
+      - name: Check Format
+        id: check
+        run: |
+          if [[ ! "${{ github.ref_name }}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "does not target, skipping"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          fi
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Cache Gradle packages
@@ -26,9 +34,52 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle
       - name: Publish
+        if: steps.check.outputs.skip != 'true'
         run: |
           ./gradlew -Pversion=${{ github.ref_name }} clean assembleRelease publish
         env:
           USERNAME: ${{ github.repository_owner }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CI: true
+  deploy-cloud-storage:
+    name: "Deploy to Cloud Storage"
+    runs-on: macos-14
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    steps:
+      - name: Authorize to Google Cloud
+        uses: 'google-github-actions/auth@v2'
+        with:
+          workload_identity_provider: ${{ secrets.GOOGLE_CLOUD_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GOOGLE_CLOUD_SERVICE_ACCOUNT }}
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle
+      - name: Build
+        run: |
+          rm -rf ~/.m2/repository/net/iseteki/aizome
+          ./gradlew -Pversion=${{ github.ref_name }} clean assembleRelease publishToMavenLocal
+          mkdir -p ./public/net/iseteki
+          cp -r ~/.m2/repository/net/iseteki/aizome ./public/net/iseteki/
+        env:
+          USERNAME: ${{ github.repository_owner }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CI: true
+      - name: Upload to Cloud Storage
+        run: |
+          gsutil -m cp -r ./public/* gs://${{ env.GOOGLE_CLOUD_STORAGE }}/
+        env:
+          GOOGLE_CLOUD_STORAGE: ${{ secrets.GOOGLE_CLOUD_STORAGE_BUCKET }}
+
