@@ -1,7 +1,5 @@
 package net.iseteki.aizome
 
-import StyledStringBuilder
-
 class FakeStringStyle(
     private val color: String? = null,
     private val fontSize: Int? = null,

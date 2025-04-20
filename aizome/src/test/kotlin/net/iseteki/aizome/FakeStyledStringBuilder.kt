@@ -1,7 +1,5 @@
 package net.iseteki.aizome
 
-import StyledStringBuilder
-
 class FakeStyledStringBuilder(
     var text: String,
     var color: String = "",
