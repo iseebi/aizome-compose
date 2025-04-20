@@ -1,7 +1,6 @@
-package net.iseteki.aizome.android
+package net.iseteki.aizome
 
 import androidx.compose.ui.text.AnnotatedString
-import net.iseteki.aizome.StringStyle
 import net.iseteki.aizome.render.RenderLogger
 import net.iseteki.aizome.render.RenderOperator
 import net.iseteki.aizome.render.lookupStyle

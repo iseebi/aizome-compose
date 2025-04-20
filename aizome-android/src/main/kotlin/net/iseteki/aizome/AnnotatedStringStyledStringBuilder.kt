@@ -1,6 +1,5 @@
-package net.iseteki.aizome.multiplatform
+package net.iseteki.aizome
 
-import StyledStringBuilder
 import androidx.compose.ui.text.AnnotatedString
 
 class AnnotatedStringStyledStringBuilder(annotatedString: AnnotatedString) :
