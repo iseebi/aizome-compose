@@ -8,9 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -18,7 +16,6 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import net.iseteki.aizome.Aizome
 import net.iseteki.aizome.SpanStyleStringStyle
-import net.iseteki.aizome.StringStyle
 import net.iseteki.aizome.example.view.AizomeSampleView
 
 class MainActivity : ComponentActivity() {
@@ -27,7 +24,7 @@ class MainActivity : ComponentActivity() {
 
         // Initialize Aizome instance
         Aizome.instance.setDefaultStyles(
-            mapOf<String, StringStyle<AnnotatedString>>(
+            mapOf(
                 "bold" to SpanStyleStringStyle(SpanStyle(fontWeight = FontWeight.Bold)),
                 "italic" to SpanStyleStringStyle(SpanStyle(fontStyle = FontStyle.Italic)),
                 "underline" to SpanStyleStringStyle(SpanStyle(textDecoration = TextDecoration.Underline)),
