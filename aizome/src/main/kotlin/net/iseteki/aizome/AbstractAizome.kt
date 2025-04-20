@@ -20,16 +20,16 @@ abstract class AbstractAizome<T>(
         get() = _logger
     private var _logger: AizomeLogger = AizomeDefaultLogger()
 
-    private var _parser: Parser = Parser(ParserLoggerImpl(_logger))
-    private var _render: Render<T> = RenderImpl(RenderLoggerImpl(_logger), renderOperator)
-
     fun setDefaultStyles(styles: Map<String, StringStyle<T>>) {
         _defaultStyles = styles
     }
 
     fun setLogger(logger: AizomeLogger) {
         _logger = logger
-        _parser = Parser(ParserLoggerImpl(_logger))
-        _render = RenderImpl(RenderLoggerImpl(_logger), renderOperator)
     }
+
+    fun createParserRender(): Pair<Parser, Render<T>> = Pair(
+        Parser(ParserLoggerImpl(_logger)),
+        RenderImpl(RenderLoggerImpl(_logger), renderOperator),
+    )
 }
