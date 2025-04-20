@@ -1,20 +1,55 @@
 package net.iseteki.aizome.example.android
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.dp
+import net.iseteki.aizome.Aizome
+import net.iseteki.aizome.SpanStyleStringStyle
+import net.iseteki.aizome.StringStyle
+import net.iseteki.aizome.example.view.AizomeSampleView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        // Initialize Aizome instance
+        Aizome.instance.setDefaultStyles(
+            mapOf<String, StringStyle<AnnotatedString>>(
+                "bold" to SpanStyleStringStyle(SpanStyle(fontWeight = FontWeight.Bold)),
+                "italic" to SpanStyleStringStyle(SpanStyle(fontStyle = FontStyle.Italic)),
+                "underline" to SpanStyleStringStyle(SpanStyle(textDecoration = TextDecoration.Underline)),
+                "red" to SpanStyleStringStyle(SpanStyle(color = Color.Red)),
+                "blue" to SpanStyleStringStyle(SpanStyle(color = Color.Blue)),
+                "green" to SpanStyleStringStyle(SpanStyle(color = Color.Green)),
+            ),
+        )
+
+        setContent {
+            MaterialTheme {
+                Scaffold { padding ->
+                    Column(
+                        modifier = androidx.compose.ui.Modifier
+                            .padding(padding)
+                            .padding(16.dp)
+                            .fillMaxSize()
+                    ) {
+                        AizomeSampleView()
+                    }
+                }
+            }
         }
     }
 }
