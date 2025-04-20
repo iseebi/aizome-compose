@@ -91,7 +91,31 @@ class RenderImpl<T>(
         arguments: List<Any>,
         styles: Map<String, StringStyle<T>>
     ): T {
-        return segments.fold(operator.create("")) { result, segment ->
+        if (segments.isEmpty()) {
+            return operator.create("")
+        }
+
+        val first = segments.first().let {
+            when (it) {
+                is RenderSegment.Text -> applyStyle(it.string, it.styles, styles)
+                is RenderSegment.Placeholder -> {
+                    if (it.index >= arguments.size) {
+                        logger.warning(RenderWarning.MissingArgument(format = it.raw, index = it.index))
+                        return@let operator.create("")
+                    }
+                    val arg = arguments[it.index]
+                    val formattedString = processFormat(it.format, arg)
+                    applyStyle(formattedString, it.styles, styles)
+                }
+                is RenderSegment.Rendered -> it.styledString
+            }
+        }
+
+        if (segments.size == 1) {
+            return first
+        }
+
+        return segments.drop(1).fold(first) { result, segment ->
             when (segment) {
                 is RenderSegment.Text -> {
                     val attributedString = applyStyle(segment.string, segment.styles, styles)
@@ -103,7 +127,7 @@ class RenderImpl<T>(
                         return@fold result
                     }
                     val arg = arguments[segment.index]
-                    val formattedString = String.format(segment.format, arg)
+                    val formattedString = processFormat(segment.format, arg)
                     val attributedString = applyStyle(formattedString, segment.styles, styles)
                     operator.merge(result, attributedString)
                 }
@@ -111,7 +135,6 @@ class RenderImpl<T>(
                     operator.merge(result, segment.styledString)
                 }
             }
-            result
         }
     }
 
@@ -120,3 +143,11 @@ class RenderImpl<T>(
         return operator.apply(styledString, string.indices, styles, definitions, logger)
     }
 }
+
+private fun processFormat(format: String, args: Any): String =
+    if (format.endsWith("@")) {
+        // 末尾 @ の場合は、s でフォーマット
+        String.format("${format.dropLast(1)}s", args)
+    } else {
+        String.format(format, args)
+    }
