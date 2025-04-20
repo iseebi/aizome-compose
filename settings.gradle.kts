@@ -20,8 +20,14 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Aizome"
-include(":example-android")
-include(":example-multiplatform")
 include(":aizome")
 include(":aizome-android")
 include(":aizome-multiplatform")
+
+val ci = System.getenv("CI")?.toBoolean() ?: false
+val jitpack = System.getenv("JITPACK")?.toBoolean() ?: false
+
+if (!ci && !jitpack) {
+    include(":example-android")
+    include(":example-multiplatform")
+}
