@@ -17,7 +17,7 @@ abstract class AbstractStringStyledFormatter<T>(
         return render.renderAsLiteral(renderSegments, styles)
     }
 
-    fun format(vararg arguments: List<Any>): T {
+    fun format(vararg arguments: Any): T {
         return render.renderWithFormats(renderSegments, arguments.toList(), styles)
     }
 }
