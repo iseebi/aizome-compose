@@ -12,7 +12,9 @@ Aizome is a lightweight library for rendering richly styled text in Compose (Jet
 
 ### Configure repository
 
-Aizome is distributed via GitHub Package Registry.
+Aizome is distributed via GitHub Package Registry or maven.iseteki.net.
+
+#### GitHub Package Registry
 
 Add the following repository to your `settings.gradle.kts` (or `build.gradle.kts`) to use it:
 
@@ -49,6 +51,36 @@ repositories {
 > Note:
 Accessing GitHub Packages requires authentication.
 You must provide a GitHub Personal Access Token with the read:packages permission via GITHUB_TOKEN environment variable or Gradle properties (gpr.user, gpr.key).
+
+#### maven.iseteki.net
+
+Add the following repository to your `settings.gradle.kts` (or `build.gradle.kts`) to use it:
+
+```kotlin
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+        maven {
+            url = uri("https://maven.iseteki.net/")
+        }
+    }
+}
+```
+
+Or if you are using a `build.gradle.kts` without dependencyResolutionManagement, add:
+
+```kotlin
+repositories {
+    mavenCentral()
+    maven {
+        url = uri("https://maven.iseteki.net/")
+    }
+}
+```
+
+> Note:
+maven.iseteki.net is a self-hosted distribution server maintained by the developer.
+It may be suspended without notice if distribution costs or server load become unsustainable.
 
 ### for Android (Jetpack Compose)
 
