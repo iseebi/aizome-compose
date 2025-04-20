@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="aizome-jvm">
+    <output-path>$PROJECT_DIR$/aizome/build/libs</output-path>
+    <root id="archive" name="aizome-jvm.jar">
+      <element id="module-output" name="Aizome.aizome.jvmMain" />
+    </root>
+  </artifact>
+</component>
