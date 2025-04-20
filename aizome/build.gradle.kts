@@ -13,6 +13,7 @@ kotlin {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_17)
         }
+        publishLibraryVariants("release")
     }
     iosX64()
     iosArm64()
@@ -42,10 +43,20 @@ tasks.withType<Test>().configureEach {
 
 publishing {
     publications {
-        withType<MavenPublication>().matching { it.name == "kotlinMultiplatform" }.configureEach {
-            groupId = "com.github.iseebi.aizome-compose"
-            artifactId = "aizome"
+        withType<MavenPublication>().configureEach {
+            groupId = "net.iseteki.aizome"
             version = project.version.toString()
+        }
+    }
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/iseebi/aizome-compose")
+            credentials {
+                username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
+                password = project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
+            }
         }
     }
 }
