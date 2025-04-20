@@ -39,3 +39,13 @@ dependencies {
 tasks.withType<Test>().configureEach {
     useJUnitPlatform()
 }
+
+publishing {
+    publications {
+        withType<MavenPublication>().matching { it.name == "kotlinMultiplatform" }.configureEach {
+            groupId = "com.github.iseebi.aizome-compose"
+            artifactId = "aizome"
+            version = project.version.toString()
+        }
+    }
+}

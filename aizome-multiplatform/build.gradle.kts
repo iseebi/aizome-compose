@@ -38,3 +38,13 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 }
+
+publishing {
+    publications {
+        withType<MavenPublication>().matching { it.name == "kotlinMultiplatform" }.configureEach {
+            groupId = "com.github.iseebi.aizome-compose"
+            artifactId = "aizome-multiplatform"
+            version = project.version.toString()
+        }
+    }
+}
