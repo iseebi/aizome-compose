@@ -1,0 +1,42 @@
+name: Build/release
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  release:
+    runs-on: macos-14
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+    strategy:
+      matrix:
+        component:
+          - aizome
+          - aizome-android
+          - aizome-multiplatform
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle
+      - name: Publish
+        run: |
+          ./gradlew -Pversion=$VERSION clean :$COMPONENT:assembleRelease :$COMPONENT:publish
+        env:
+          USERNAME: ${{ github.repository_owner }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CI: true
+          VERSION: ${{ github.ref_name }}
+          COMPONENT: ${{ matrix.component }}
