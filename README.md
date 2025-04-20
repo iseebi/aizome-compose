@@ -1,8 +1,7 @@
 # Aizome
 
 
-[![Release](https://img.shields.io/github/v/release/iseebi/aizome-compose)](https://github.com/iseebi/aizome-compose/releases/latest)
-[![License](https://img.shields.io/github/license/iseebi/aizome-compose)](https://github.com/iseebi/aizome-compose/blob/main/LICENSE)
+[![Release](https://img.shields.io/github/v/release/iseebi/aizome-compose)](https://github.com/iseebi/aizome-compose/releases/latest) [![License](https://img.shields.io/github/license/iseebi/aizome-compose)](https://github.com/iseebi/aizome-compose/blob/main/LICENSE)
 
 
 See also: [aizome-swiftui(for iOS native)](https://github.com/iseebi/aizome-swiftui)
