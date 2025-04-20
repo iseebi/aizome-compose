@@ -10,8 +10,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/aizome" />
             <option value="$PROJECT_DIR$/aizome-android" />
+            <option value="$PROJECT_DIR$/aizome-core" />
             <option value="$PROJECT_DIR$/aizome-multiplatform" />
             <option value="$PROJECT_DIR$/example-android" />
             <option value="$PROJECT_DIR$/example-multiplatform" />

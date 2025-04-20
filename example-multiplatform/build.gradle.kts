@@ -43,7 +43,7 @@ kotlin {
             implementation(libs.jetbrains.androidx.lifecycle.viewmodel)
             implementation(libs.jetbrains.androidx.lifecycle.runtime.compose)
 
-            implementation(project(":aizome"))
+            implementation(project(":aizome-core"))
             implementation(project(":aizome-multiplatform"))
         }
     }
@@ -77,7 +77,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":aizome"))
+    implementation(project(":aizome-core"))
     implementation(project(":aizome-multiplatform"))
     debugImplementation(compose.uiTooling)
 }

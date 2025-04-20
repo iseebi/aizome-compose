@@ -51,6 +51,6 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.activity.compose)
     implementation(libs.material)
-    implementation(project(":aizome"))
+    implementation(project(":aizome-core"))
     implementation(project(":aizome-android"))
 }

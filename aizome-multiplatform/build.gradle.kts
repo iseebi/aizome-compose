@@ -24,7 +24,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(project(":aizome"))
+            implementation(project(":aizome-core"))
             implementation(compose.ui)
         }
     }

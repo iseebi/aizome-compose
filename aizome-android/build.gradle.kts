@@ -24,7 +24,7 @@ android {
 }
 dependencies {
     implementation(libs.androidx.compose.ui.text)
-    implementation(project(":aizome"))
+    implementation(project(":aizome-core"))
 }
 
 afterEvaluate {

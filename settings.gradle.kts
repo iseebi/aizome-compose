@@ -20,7 +20,7 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Aizome"
-include(":aizome")
+include(":aizome-core")
 include(":aizome-android")
 include(":aizome-multiplatform")
 
