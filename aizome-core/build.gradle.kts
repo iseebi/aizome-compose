@@ -1,5 +1,6 @@
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import net.iseteki.aizome.buildConfiguration.defaultPom
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -46,6 +47,11 @@ publishing {
         withType<MavenPublication>().configureEach {
             groupId = "net.iseteki.aizome"
             version = project.version.toString()
+            pom {
+                defaultPom(
+                    libName = artifactId,
+                )
+            }
         }
     }
 

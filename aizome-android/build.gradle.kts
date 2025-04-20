@@ -1,3 +1,5 @@
+import net.iseteki.aizome.buildConfiguration.defaultPom
+
 plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.android.library)
@@ -36,6 +38,12 @@ afterEvaluate {
                 groupId = "net.iseteki.aizome"
                 artifactId = "aizome-android"
                 version = project.version.toString()
+
+                pom {
+                    defaultPom(
+                        libName = artifactId,
+                    )
+                }
             }
         }
 
