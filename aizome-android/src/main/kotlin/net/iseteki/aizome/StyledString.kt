@@ -11,7 +11,7 @@ fun styledString(
     val usingStyles = if (ignoreDefaultStyles) {
         styles
     } else {
-        styles + Aizome.instance.defaultStyles
+        Aizome.instance.defaultStyles + styles
     }
 
     val parserRender = Aizome.instance.createParserRender()
