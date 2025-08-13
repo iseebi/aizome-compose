@@ -25,6 +25,7 @@ android {
     }
 }
 dependencies {
+    implementation(libs.androidx.compose.runtime.android)
     implementation(libs.androidx.compose.ui.text)
     implementation(project(":aizome-core"))
 }
