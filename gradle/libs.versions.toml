@@ -25,6 +25,7 @@ material = { group = "com.google.android.material", name = "material", version.r
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidxComposeBom" }
 androidx-compose-ui-text = { group = "androidx.compose.ui", name = "ui-text", version.ref = "androidxCompose" }
+androidx-compose-runtime-android = { group = "androidx.compose.runtime", name = "runtime-android", version.ref = "androidxCompose" }
 jetbrains-androidx-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "jetbrains-androidx-lifecycle" }
 jetbrains-androidx-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "jetbrains-androidx-lifecycle" }
 

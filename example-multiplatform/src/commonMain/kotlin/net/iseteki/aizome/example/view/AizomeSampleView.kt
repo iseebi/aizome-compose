@@ -7,7 +7,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import net.iseteki.aizome.StringStyledFormatter
-import net.iseteki.aizome.styledString
+import net.iseteki.aizome.rememberStyledString
 
 @Composable
 fun AizomeSampleView() {
@@ -18,17 +18,17 @@ fun AizomeSampleView() {
     ) {
         Section {
             TitleText("Formatted Styled Text")
-            Text(styledString("This is <red>red</red> and <bold>bold</bold> text with &lt;escaped&gt; HTML."))
+            Text(rememberStyledString("This is <red>red</red> and <bold>bold</bold> text with &lt;escaped&gt; HTML."))
         }
 
         Section {
             TitleText("Colorized")
-            Text(styledString("<red>Red</red><blue>Blue</blue><green>Green</green>"))
+            Text(rememberStyledString("<red>Red</red><blue>Blue</blue><green>Green</green>"))
         }
 
         Section {
             TitleText("Over-wrapped Styles")
-            Text(styledString("<red><bold>RedBold</bold></red> <blue><italic>BlueItalic</italic></blue> <green><underline>GreenUnderline</underline></green> /  <red>around red but this is <blue>blue<blue> text</red>"))
+            Text(rememberStyledString("<red><bold>RedBold</bold></red> <blue><italic>BlueItalic</italic></blue> <green><underline>GreenUnderline</underline></green> /  <red>around red but this is <blue>blue<blue> text</red>"))
         }
 
         Section {

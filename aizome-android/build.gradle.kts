@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.android.library)
     alias(libs.plugins.maven.publish)
+    alias(libs.plugins.compose.compiler)
 }
 android {
     namespace = "net.iseteki.aizome.android"
@@ -18,6 +19,10 @@ android {
         jvmTarget = "17"
     }
 
+    buildFeatures {
+        compose = true
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -25,6 +30,7 @@ android {
     }
 }
 dependencies {
+    implementation(libs.androidx.compose.runtime.android)
     implementation(libs.androidx.compose.ui.text)
     implementation(project(":aizome-core"))
 }
