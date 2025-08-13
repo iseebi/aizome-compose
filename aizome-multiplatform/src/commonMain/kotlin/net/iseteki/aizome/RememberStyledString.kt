@@ -7,9 +7,10 @@ import androidx.compose.runtime.remember
 @Composable
 fun rememberStyledString(
     formatString: String,
-    styles: Map<String, StringStyle<AnnotatedString>> = Aizome.instance.defaultStyles,
+    styles: Map<String, StringStyle<AnnotatedString>> = emptyMap(),
+    ignoreDefaultStyles: Boolean = false,
 ): AnnotatedString {
-    return remember(formatString, styles) {
-        styledString(formatString, styles)
+    return remember(formatString, styles, ignoreDefaultStyles) {
+        styledString(formatString, styles, ignoreDefaultStyles)
     }
 }
