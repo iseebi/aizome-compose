@@ -141,6 +141,12 @@ Render the styled string in Compose:
 styledString(message)
 ```
 
+Also recommended to use `rememberStyledString` to cache the styled string for performance:
+
+```kotlin
+rememberStyledString(message)
+```
+
 ### 4. Format Strings with Parameters
 
 You can use placeholders like `%s`, `%d`, and other String.format-style specifiers inside your styled text.
