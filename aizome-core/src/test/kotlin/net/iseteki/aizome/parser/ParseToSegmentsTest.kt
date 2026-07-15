@@ -63,6 +63,28 @@ class ParseToSegmentsTest {
     }
 
     @Test
+    fun parsesComplexesWithFormat() {
+        val logger = TestParserLogger()
+        val segments = parseToSegments("a<bold><red>%d-%d</red></bold>c", logger)
+
+        assertEquals(3, segments.size)
+
+        val s0 = segments[0] as ParserSegment.Text
+        assertEquals("a", s0.string)
+        assertTrue(s0.styles.isEmpty())
+
+        val s1 = segments[1] as ParserSegment.Text
+        assertEquals("%d-%d", s1.string)
+        assertEquals(listOf("bold", "red"), s1.styles)
+
+        val s2 = segments[2] as ParserSegment.Text
+        assertEquals("c", s2.string)
+        assertTrue(s2.styles.isEmpty())
+
+        assertTrue(logger.warnings.isEmpty())
+    }
+
+    @Test
     fun warnsOnUnopenedClosingTag() {
         val logger = TestParserLogger()
         parseToSegments("Hello</blue>", logger)
