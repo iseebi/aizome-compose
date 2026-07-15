@@ -93,6 +93,23 @@ class ParseParameterStringsTest {
         runTest(input, expect)
     }
 
+    @Test
+    fun parsesComplexesFormat() {
+        val input = listOf(
+            ParserSegment.Text("a", emptyList()),
+            ParserSegment.Text("%d-%d", listOf("bold", "red")),
+            ParserSegment.Text("c", emptyList()),
+        )
+        val expect = listOf(
+            ParserSegment.Text("a", emptyList()),
+            ParserSegment.Placeholder("%d", "%d", 0, listOf("bold", "red")),
+            ParserSegment.Text("-", listOf("bold", "red")),
+            ParserSegment.Placeholder("%d", "%d", 1, listOf("bold", "red")),
+            ParserSegment.Text("c", emptyList())
+        )
+        runTest(input, expect)
+    }
+
     private fun runTest(
         input: List<ParserSegment>,
         expect: List<ParserSegment>,
