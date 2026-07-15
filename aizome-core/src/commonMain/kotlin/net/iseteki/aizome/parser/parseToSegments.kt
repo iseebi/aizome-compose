@@ -46,7 +46,7 @@ internal fun parseToSegments(string: String, logger: ParserLogger): List<ParserS
 
         // タグまでの文字列をセグメントに追加する
         val textRange = i until startTagRange
-        if (textRange.first < textRange.last) {
+        if (i < startTagRange) {
             appendTextSegment(
                 string.substring(textRange.first, textRange.last+1),
                 styles = styleStack,
